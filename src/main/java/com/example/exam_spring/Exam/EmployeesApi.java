@@ -13,9 +13,15 @@ public class EmployeesApi {
     EmployeesReposivetory employeesReposivetory;
 
     @PostMapping
-    public Employees save(@RequestBody Employees employees){
+    public Employees createEmployees(@RequestBody Employees employees){
         employeesReposivetory.save(employees);
         return employees;
     }
-
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Employees> findAllEmployees(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit
+    ) {
+        return employeesReposivetory.findAll();
+    }
 }
